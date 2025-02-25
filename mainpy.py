@@ -1,4 +1,4 @@
-import cv2
+'''import cv2
 import mediapipe as mp
 import numpy as np
 import math
@@ -123,3 +123,6 @@ while cap.isOpened():
 
 cap.release()
 cv2.destroyAllWindows()
+'''
+#TODO
+#make code that joins everything together
