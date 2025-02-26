@@ -22,7 +22,7 @@ i = 0
 fw = open('./temp.txt', 'w')
 
 while i<=num_of_frames:
-    frame_rate = 14
+    frame_rate = 20
     prev = 0
     cap = cv2.VideoCapture('christo_pushup.mp4')
     with mp_pose.Pose(min_detection_confidence = 0.6, min_tracking_confidence = 0.5) as pose:
@@ -33,7 +33,7 @@ while i<=num_of_frames:
             print(count)
             c = 0
 
-
+            #code to limit the frame rate
             time_elapsed = time.time() - prev
             ret, frame = cap.read()
             if time_elapsed > 1./frame_rate:
@@ -78,20 +78,20 @@ while i<=num_of_frames:
 
                 if cv2.waitKey(10) & 0xFF == ord('q'):
                     break
-                else:
-                    for j in range(len(state)):
-                        if state[j]-angles[j]<18:
-                            #print(c)
-                            c += 1
-                        else:
-                            c = 0
-                            break
-                    if c>=7:
-    #                    print('i:', i)
-                        i += 1
-                        if i >= num_of_frames:
-                            i = 0
-                            count += 1
+                for j in range(len(state)):
+                    if state[j]-angles[j]<18:
+                        #print(c)
+                        c += 1
+                    else:
+                        c = 0
+                        break
+                if c>=7:
+    #               print('i:', i)
+                    c = 0
+                    i += 1
+                    if i >= num_of_frames:
+                        i = 0
+                        count += 1
                     continue
         cap.release()
         cv2.destroyAllWindows()
