@@ -10,6 +10,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -23,6 +25,8 @@ class MyApp extends StatelessWidget {
 }
 
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,6 +61,8 @@ class HomeScreen extends StatelessWidget {
 }
 
 class ExerciseScreen extends StatefulWidget {
+  const ExerciseScreen({super.key});
+
   @override
   _ExerciseScreenState createState() => _ExerciseScreenState();
 }
@@ -124,7 +130,7 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
 
   // Send the video frame to the server
   Future<void> _sendFrameToServer(Uint8List frameData) async {
-    final url = Uri.parse('http://127.0.0.1:2000/upload');
+    final url = Uri.parse('http://192.168.95.73:2000/upload');
     final response = await http.post(
       url,
       headers: {
@@ -183,6 +189,8 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
 }
 
 class SessionHistoryScreen extends StatelessWidget {
+  const SessionHistoryScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
