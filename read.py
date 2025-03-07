@@ -79,7 +79,7 @@ while i<=num_of_frames:
                 if cv2.waitKey(10) & 0xFF == ord('q'):
                     break
                 for j in range(len(state)):
-                    if state[j]-angles[j]<18:
+                    if abs(state[j]-angles[j])<22:
                         #print(c)
                         c += 1
                     else:
