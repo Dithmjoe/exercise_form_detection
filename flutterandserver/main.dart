@@ -159,7 +159,7 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
   }
 
   Future<void> _sendFrameToServer(Uint8List frameData) async {
-    final url = Uri.parse('http://192.168.95.73:2000/upload');
+    final url = Uri.parse('http://192.168.92.73:2000/upload');
     final response = await http.post(
       url,
       headers: {
