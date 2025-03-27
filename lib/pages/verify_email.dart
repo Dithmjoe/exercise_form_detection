@@ -1,13 +1,9 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:posex/pages/sign_in.dart';
-import 'package:posex/routes.dart';
+import 'package:posex/constants/colors.dart';
+import 'package:posex/constants/routes.dart';
 import 'package:posex/services/auth/auth_services.dart';
 import 'package:flutter/material.dart';
-
-const backgroundBlack = Color(0xFF323232);
-const reddishBlack = Color(0xFF190909);
-const white = Color(0xFFFFFFFF);
 
 class VerifyEmailView extends StatefulWidget {
   const VerifyEmailView({super.key});
@@ -46,7 +42,7 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
                 backgroundColor: WidgetStatePropertyAll(oliveGold),
                 foregroundColor: WidgetStatePropertyAll(white),
               ),
-              child: Text('verify email', style: TextStyle(color: white)),
+              child: Text('send verify email', style: TextStyle(color: white)),
             ),
             SizedBox(height: 50,),
             TextButton(
@@ -54,7 +50,7 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
                 await AuthServices.firebase().logOut();
                 Navigator.of(
                   context,
-                ).pushNamedAndRemoveUntil(signInRoute, (context) => false);
+                ).pushNamedAndRemoveUntil(signInRoute, (route) => false);
               },
               style: ButtonStyle(
                             backgroundColor: WidgetStatePropertyAll(white),

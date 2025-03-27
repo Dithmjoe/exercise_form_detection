@@ -2,17 +2,23 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:posex/constants/colors.dart';
+import 'package:posex/constants/routes.dart';
+import 'package:posex/main.dart';
 import 'package:posex/modals/workouts.dart';
-
-const backgroundBlack = Color(0xFF323232);
-const white = Color(0xFFF3F3F3);
-const red = Color(0xF3693636);
+import 'package:posex/services/auth/auth_services.dart';
 
 //ignore: must_be_immutable
-class Homepage extends StatelessWidget {
-  Homepage({super.key});
+class Homepage extends StatefulWidget {
+  const Homepage({super.key});
 
+  @override
+  State<Homepage> createState() => _HomepageState();
+}
+
+class _HomepageState extends State<Homepage> {
   List<workouts> exlist = [];
+
   final exNameList = ['Workout', 'Core', 'Back', 'Biceps'];
 
   void getworkouts() {
@@ -74,7 +80,7 @@ class Homepage extends StatelessWidget {
 
   SizedBox excerciseScroller(int index) {
     return SizedBox(
-      height: 100,
+      height: 120,
       width: 169,
       child: Stack(
         alignment: Alignment.center,
@@ -87,18 +93,21 @@ class Homepage extends StatelessWidget {
           ),
           Column(
             children: [
-              SizedBox(height: 70),
+              SizedBox(height: 60),
               Container(
                 width: 150,
                 height: 2,
                 decoration: BoxDecoration(color: white),
               ),
-              Text(
-                exlist[index].name,
-                style: TextStyle(
-                  fontFamily: 'JockeyOne',
-                  fontSize: 20,
-                  color: white,
+              TextButton(
+                onPressed: () { Navigator.of(context).pushNamed(preExcerciseRoute); },
+                child: Text(
+                  exlist[index].name,
+                  style: TextStyle(
+                    fontFamily: 'JockeyOne',
+                    fontSize: 20,
+                    color: white,
+                  ),
                 ),
               ),
             ],
@@ -186,20 +195,46 @@ class Homepage extends StatelessWidget {
         ),
       ),
       actions: [
-        GestureDetector(
-          onTap: () {},
-          child: Container(
-            margin: EdgeInsets.all(10),
-            height: 50,
-            width: 50,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.white,
-            ),
-            alignment: Alignment.center,
+        PopupMenuButton<MenuAction>(
+            onSelected: (value) async {
+              switch (value) {
+                case MenuAction.logOut:
+                  final shouldLogout = await showLogOutDialog(context);
+                  if (shouldLogout) {
+                    // devtools.log(value.toString());
+                    await AuthServices.firebase().logOut();
+                    if (context.mounted) {
+                      Navigator.of(
+                        context,
+                      ).pushNamedAndRemoveUntil(signInRoute, (_) => false);
+                    }
+                  }
+              }
+            },
+            icon: Icon(Icons.more_vert,color: Colors.white),
+            itemBuilder: (context) {
+              return [
+                PopupMenuItem<MenuAction>(
+                  value: MenuAction.logOut,
+                  child: Text('log out'),
+                ),
+              ];
+            },
           ),
-        ),
+        // Container(
+        //   margin: EdgeInsets.all(10),
+        //   height: 50,
+        //   width: 50,
+        //   decoration: BoxDecoration(
+        //     shape: BoxShape.circle,
+        //     color: Colors.white,
+        //   ),
+        //   alignment: Alignment.center,
+        // ),
       ],
     );
   }
 }
+
+
+enum MenuAction {logOut}

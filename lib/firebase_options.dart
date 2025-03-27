@@ -59,4 +59,5 @@ class DefaultFirebaseOptions {
     projectId: 'posex-posture-corrector',
     storageBucket: 'posex-posture-corrector.firebasestorage.app',
   );
+
 }

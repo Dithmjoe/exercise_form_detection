@@ -1,14 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
-import 'package:posex/routes.dart';
+import 'package:posex/constants/routes.dart';
 import 'package:posex/services/auth/auth_exceptions.dart';
 import 'package:posex/services/auth/auth_services.dart';
 import 'package:posex/utils/show_error.dart';
 
-const backgroundBlack = Color(0xFF323232);
-const oliveGold = Color(0xFFB5B25C);
-const reddishBlack = Color(0xFF190909);
-const white = Color(0xFFFFFFFF);
-const shadedWhite = Color(0xFFB2AAAD);
+import '../constants/colors.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -91,6 +89,7 @@ class _SignInState extends State<SignIn> {
                             ),
                           ),
                         ),
+                        style: TextStyle(color: white),
                       ), //email
                       SizedBox(height: 28),
                       Text(
@@ -115,6 +114,7 @@ class _SignInState extends State<SignIn> {
                             ),
                           ),
                         ),
+                        style: TextStyle(color: white),
                       ),
                       SizedBox(height: 48),
                       SizedBox(
@@ -167,7 +167,7 @@ class _SignInState extends State<SignIn> {
                         padding: const EdgeInsets.only(left: 30),
                         child: TextButton(
                           onPressed: () {
-                            Navigator.of(context).pushNamedAndRemoveUntil(signUpRoute, (context) => false);
+                            Navigator.of(context).pushNamedAndRemoveUntil(signUpRoute, (route) => false);
                           },
                           child: Text(
                             "Don't have an account? Sign Up",

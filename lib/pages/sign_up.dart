@@ -1,11 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:posex/routes.dart';
+import 'package:posex/constants/routes.dart';
 
-const backgroundBlack = Color(0xFF323232);
-const oliveGold = Color(0xFFB5B25C);
-const reddishBlack = Color(0xFF190909);
-const white = Color(0xFFFFFFFF);
-const shadedWhite = Color(0xFFB2AAAD);
+import '../constants/colors.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -102,6 +99,7 @@ class _SignUpState extends State<SignUp> {
                             ),
                           ),
                         ),
+                        style: TextStyle(color: white),
                       ), //email
                       SizedBox(height: 28),
                       Text(
@@ -126,13 +124,17 @@ class _SignUpState extends State<SignUp> {
                             ),
                           ),
                         ),
+                        style: TextStyle(color: white),
                       ),
                       SizedBox(height: 48),
                       SizedBox(
                         height: 54,
                         width: 263,
                         child: TextButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            final user = FirebaseAuth.instance.createUserWithEmailAndPassword(email: _email.text, password: _password.text);
+                            Navigator.of(context).pushNamedAndRemoveUntil(verifyRoute, (route) => false);
+                          },
                           style: ButtonStyle(
                             backgroundColor: WidgetStatePropertyAll(oliveGold),
                             foregroundColor: WidgetStatePropertyAll(white),
@@ -156,7 +158,7 @@ class _SignUpState extends State<SignUp> {
                         padding: const EdgeInsets.only(left: 30),
                         child: TextButton(
                           onPressed: () {
-                            Navigator.of(context).pushNamedAndRemoveUntil(signInRoute, (context) => false);
+                            Navigator.of(context).pushNamed(signInRoute);
                           },
                           child: Text(
                             "Already have an account? Sign In",
@@ -201,6 +203,7 @@ class _SignUpState extends State<SignUp> {
                 borderSide: BorderSide(color: backgroundBlack, width: 3.0),
               ),
             ),
+            style: TextStyle(color: white),
           ),
         ),
       ],
