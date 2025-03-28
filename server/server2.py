@@ -166,8 +166,8 @@ def upload_video():
                 predicted_right_shoulder = predict_shoulder(right_elbow, right_wrist,w,h)
                 cv2.line(frame_bgr, predicted_left_shoulder, left_ankle_point, (0, 255, 255), 1) 
                 cv2.line(frame_bgr, predicted_right_shoulder, right_ankle_point, (0, 255, 255), 1)
-                cv2.line(frame_bgr, predicted_left_shoulder, left_elbow_point, (0, 255, 255), 1) 
-                cv2.line(frame_bgr, predicted_right_shoulder, right_elbow_point, (0, 255, 255), 1)
+                #cv2.line(frame_bgr, predicted_left_shoulder, left_elbow_point, (0, 255, 255), 1) 
+                #cv2.line(frame_bgr, predicted_right_shoulder, right_elbow_point, (0, 255, 255), 1)
 
 
                 angles = extvals(landmarks)
